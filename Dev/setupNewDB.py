@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 import MySQLdb
 
 #open connection to mysql server
