@@ -58,7 +58,7 @@ while (1):
 	print "%s" % (row[0])
 print "%d rows were returned" % cursor.rowcount
 
-if absent:
+if not absent:
 	calculateWeek(currentWeek, cursor)
 
 #close connection to mysql server
