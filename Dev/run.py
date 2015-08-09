@@ -27,7 +27,7 @@ futureYear = dateFuture.isocalendar()[0]
 
 #test is there is a rooster for the current week
 cursor.execute("""
-					SELECT weeknummer, naam FROM rooster
+					SELECT weeknummer FROM rooster
 """)
 
 #print weeknumbers
@@ -35,7 +35,7 @@ while (1):
 	row = cursor.fetchone ()
 	if row == None:
 		break
-	print "%s, %s" % (row[0], row[1])
+	print "%s" % (row[0])
 print "%d rows were returned" % cursor.rowcount
 
 
