@@ -6,7 +6,7 @@
 import MySQLdb
 import datetime
 
-def calculateTaskIDs(weekNumber)
+def calculateTaskIDs(weekNumber):
 	list = []
 	cursor.execute ("SELECT id, regelmaat FROM taken")
 	row = cursor.fetchone ()
@@ -19,7 +19,7 @@ def calculateTaskIDs(weekNumber)
 	return list
 
 
-def calculateWeek (weekNumber, cursor)
+def calculateWeek (weekNumber, cursor):
 	taskIDList = calculateTaskIDs(weekNumber)
 	print taskIDList.count
 
