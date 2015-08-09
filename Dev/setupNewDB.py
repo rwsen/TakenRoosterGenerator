@@ -28,8 +28,8 @@ cursor.execute("""
 			(4, 'Douchekabines', 1),
 			(5, 'Doucheruimte', 1),
 			(6, 'Keuken: aanrechten', 1),
-			(7, 'Keuken: vloer', 1)
-			(8, 'Keuken: vloer', 1)
+			(7, 'Keuken: vloer', 1),
+			(8, 'Keuken: vloer', 1),
 			(9, 'Trappenhuis', 3),
 			(10, 'Trappenhuis', 3),
 			(11, 'Ramen', 8),
