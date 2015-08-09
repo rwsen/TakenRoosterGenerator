@@ -81,7 +81,7 @@ cursor.execute("""
 			(17, 'Thijmen'),
 			(18, 'Tim'),
 			(19, 'Paul'),
-			(20, 'Jurriën'),
+			(20, 'Jurrien'),
 			(21, 'Thomas'),
 			(22, 'Rick'),
 			(23, 'Alper'),
