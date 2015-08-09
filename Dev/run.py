@@ -25,6 +25,18 @@ dateFuture = dateToday + datetime.timedelta(210)
 futureWeek = dateFuture.isocalendar()[1]
 futureYear = dateFuture.isocalendar()[0]
 
+#test is there is a rooster for the current week
+cursor.execute("""
+					SELECT weeknummer, naam FROM rooster
+""")
+
+#print weeknumbers
+while (1):
+	row = cursor.fetchone ()
+	if row == None:
+		break
+	print "%s, %s" % (row[0], row[1])
+print "%d rows were returned" % cursor.rowcount
 
 
 #close connection to mysql server
