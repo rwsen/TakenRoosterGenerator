@@ -48,13 +48,13 @@ cursor.execute("""
 """)
 
 #print weeknumbers
-absent = false
+absent = False
 while (1):
 	row = cursor.fetchone ()
 	if row == None:
 		break
 	if row == currentWeek:
-		absent = true
+		absent = True
 	print "%s" % (row[0])
 print "%d rows were returned" % cursor.rowcount
 
