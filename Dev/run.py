@@ -13,7 +13,7 @@ def calculateTaskIDs(weekNumber):
 		row = cursor.fetchone ()
 		if row == None:
 			break
-		if weekNumber%row[1]:
+		if weekNumber%row[1]==0:
 			list.append(row[0])
 	
 	return list
