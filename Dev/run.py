@@ -21,7 +21,7 @@ def calculateTaskIDs(weekNumber):
 
 def calculateWeek (weekNumber, cursor):
 	taskIDList = calculateTaskIDs(weekNumber)
-	print taskIDList.count()
+	print len(taskIDList)
 	return
 
 
