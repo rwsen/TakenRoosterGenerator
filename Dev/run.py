@@ -6,6 +6,23 @@
 import MySQLdb
 import datetime
 
+def calculateTaskIDs(weekNumber)
+	list = []
+	cursor.execute ("SELECT id, regelmaat FROM taken")
+	row = cursor.fetchone ()
+	while (1)
+		if row == None
+			break
+		if weekNumber%row[1]
+			list.append(row[0])
+	
+	return list
+
+
+def calculateWeek (weekNumber, cursor)
+	taskIDList = calculateTaskIDs(weekNumber)
+	print taskIDList.count
+
 
 #open connection to mysql server
 conn = MySQLdb.connect (host = "localhost",
@@ -31,13 +48,18 @@ cursor.execute("""
 """)
 
 #print weeknumbers
+absent = false
 while (1):
-	row = cursor.fetchall ()
+	row = cursor.fetchone ()
 	if row == None:
 		break
+	if row == currentWeek
+		absent = true
 	print "%s" % (row[0])
 print "%d rows were returned" % cursor.rowcount
 
+if absent
+	calculateWeek(currentWeek, cursor)
 
 #close connection to mysql server
 cursor.close ()
