@@ -22,6 +22,7 @@ def calculateTaskIDs(weekNumber):
 def calculateWeek (weekNumber, cursor):
 	taskIDList = calculateTaskIDs(weekNumber)
 	print taskIDList.count
+	return
 
 
 #open connection to mysql server
