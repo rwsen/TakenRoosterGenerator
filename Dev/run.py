@@ -53,12 +53,12 @@ while (1):
 	row = cursor.fetchone ()
 	if row == None:
 		break
-	if row == currentWeek
+	if row == currentWeek:
 		absent = true
 	print "%s" % (row[0])
 print "%d rows were returned" % cursor.rowcount
 
-if absent
+if absent:
 	calculateWeek(currentWeek, cursor)
 
 #close connection to mysql server
