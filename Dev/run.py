@@ -10,7 +10,7 @@ def calculateTaskIDs(weekNumber):
 	list = []
 	cursor.execute ("SELECT id, regelmaat FROM taken")
 	row = cursor.fetchone ()
-	while (1)
+	while (1):
 		if row == None
 			break
 		if weekNumber%row[1]
