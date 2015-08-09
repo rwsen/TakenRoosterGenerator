@@ -32,7 +32,7 @@ cursor.execute("""
 
 #print weeknumbers
 while (1):
-	row = cursor.fetchone ()
+	row = cursor.fetchall ()
 	if row == None:
 		break
 	print "%s" % (row[0])
