@@ -39,7 +39,9 @@ def getWorkers(amount, cursor):
 		row = cursor.fetchone ()
 		if row == None:
 			break
-		print(int(row))
+		(number,) = row
+		print(row)
+		print number
 		IDList.append(row[0])
 	
 	print(IDList)
