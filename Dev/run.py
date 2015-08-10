@@ -22,8 +22,41 @@ def calculateTaskIDs(weekNumber):
 def calculateWeek (weekNumber, cursor):
 	taskIDList = calculateTaskIDs(weekNumber)
 	print len(taskIDList)
+	
+	
 	return
 
+	
+def getWorkers(amount, cursor):
+	cursor.execute("""
+						SELECT personID FROM mensen
+	""")
+	
+	#put all personIDs in IDList
+	IDList = []
+	while (1):
+		row = cursor.fetchone ()
+		if row == None:
+			break
+		IDList.append(row[0])
+	
+	#get scores to all personIDs
+	cursor.execute("""
+						SELECT personID, score FROM score
+	""")
+	scoreIDsList = []
+	while (1):
+		row = cursor.fetchone ()
+		if row == None:
+			break
+		if 1: #test availability
+			scoreIDsList.append((row[1], row[0]))
+			
+	sorted(scoreIDsList, key=lambda score: score[0])   # sort by age
+	
+	print(scoreIDsList)
+	
+	return
 
 #open connection to mysql server
 conn = MySQLdb.connect (host = "localhost",
