@@ -23,6 +23,7 @@ def calculateWeek (weekNumber, cursor):
 	taskIDList = calculateTaskIDs(weekNumber)
 	print len(taskIDList)
 	
+	getWorkers(len(taskIDList), cursor)
 	
 	return
 
