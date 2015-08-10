@@ -41,6 +41,8 @@ def getWorkers(amount, cursor):
 			break
 		IDList.append(row[0])
 	
+	print(IDList)
+	
 	#get scores to all personIDs
 	cursor.execute("""
 						SELECT personID, score FROM score
@@ -52,6 +54,8 @@ def getWorkers(amount, cursor):
 			break
 		if 1: #test availability
 			scoreIDsList.append((row[1], row[0]))
+			
+	print(scoreIDsList)
 			
 	sorted(scoreIDsList, key=lambda score: score[0])   # sort by age
 	
