@@ -52,6 +52,7 @@ def getWorkers(amount, cursor):
 	while (1):
 		row = cursor.fetchone ()
 		if row == None:
+			print("No rows were returned.")
 			break
 		if 1: #test availability
 			scoreIDsList.append((row[1], row[0]))
