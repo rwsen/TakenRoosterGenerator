@@ -112,7 +112,8 @@ cursor.execute("""
 		)
 	""")
 cursor.execute("""
-		INSERT INTO punten VALUES
+		INSERT INTO punten (personID, aantal)
+		VALUES
 			(1, 0),
 			(2, 0),
 			(3, 0),
