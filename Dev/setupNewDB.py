@@ -108,25 +108,23 @@ cursor.execute("""
 		CREATE TABLE punten
 		(
 			personID INT,
-			aantal INT,
-			tekst CHAR(40)
+			aantal INT
 		)
 	""")
 cursor.execute("""
-		INSERT INTO punten (personID, aantal, tekst)
+		INSERT INTO punten (personID, aantal)
 		VALUES
-			(1, 0, 'a'),
-			(2, 0, 'a'),
-			(3, 0, 'a'),
-			(4, 0, 'a'),
-			(5, 0, 'a')
-			
-			
+			(1, 0),
+			(2, 0),
+			(3, 0),
+			(4, 0),
+			(5, 0)
 	""")
 print "%d rows were inserted" % cursor.rowcount
 	
 	
 #close connection to mysql server
+conn.commit ()
 cursor.close ()
 conn.close ()
 
