@@ -45,9 +45,7 @@ def getWorkers(amount, cursor):
 	print(IDList)
 	
 	#get scores to all personIDs
-	cursor.execute("""
-						SELECT personID, aantal FROM punten
-	""")
+	cursor.execute("SELECT personID, aantal FROM punten")
 	scoreIDsList = []
 	while (1):
 		row = cursor.fetchone ()

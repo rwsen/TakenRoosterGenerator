@@ -108,17 +108,18 @@ cursor.execute("""
 		CREATE TABLE punten
 		(
 			personID INT,
-			aantal INT
+			aantal INT,
+			tekst CHAR(40)
 		)
 	""")
 cursor.execute("""
-		INSERT INTO punten (personID, aantal)
+		INSERT INTO punten (personID, aantal, tekst)
 		VALUES
-			(1, 0),
-			(2, 0),
-			(3, 0),
-			(4, 0),
-			(5, 0)
+			(1, 0, 'a'),
+			(2, 0, 'a'),
+			(3, 0, 'a'),
+			(4, 0, 'a'),
+			(5, 0, 'a')
 			
 			
 	""")
