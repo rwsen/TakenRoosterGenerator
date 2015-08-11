@@ -29,28 +29,6 @@ def calculateWeek (weekNumber, cursor):
 
 	
 def getWorkers(amount, cursor):
-	#get scores to all personIDs
-	cursor.execute ("SELECT * FROM score")
-	scoreIDsList = []
-	while (1):
-		row = cursor.fetchone ()
-		if row == None:
-			print("No rows were returned.")
-			break
-		print("One row was returned.")
-		if 1: #test availability
-			tempTuple = (int(row[0]))
-			scoreIDsList.append(tempTuple)
-			
-	print(scoreIDsList)
-			
-	sorted(scoreIDsList, key=lambda score: score[0])   # sort by age
-	
-	print(scoreIDsList)
-
-
-
-
 	cursor.execute("""
 						SELECT personID FROM mensen
 	""")
@@ -66,7 +44,26 @@ def getWorkers(amount, cursor):
 	
 	print(IDList)
 	
+	#get scores to all personIDs
+	cursor.execute("""
+						SELECT personID, gedaan FROM score
+	""")
+	scoreIDsList = []
+	while (1):
+		row = cursor.fetchone ()
+		if row == None:
+			print("No rows were returned.")
+			break
+		print("One row was returned")
+		if 1: #test availability
+			tempTuple = (int(row[1]), int(row[0]))
+			scoreIDsList.append(tempTuple)
+			
+	print(scoreIDsList)
+			
+	sorted(scoreIDsList, key=lambda score: score[0])   # sort by age
 	
+	print(scoreIDsList)
 	
 	return
 
