@@ -123,7 +123,7 @@ cursor.execute("""
 			
 			
 	""")
-	
+print "%d rows were inserted" % cursor.rowcount
 	
 	
 #close connection to mysql server
