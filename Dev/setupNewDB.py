@@ -52,6 +52,7 @@ print "%d rows were returned" % cursor.rowcount
 
 
 #add table mensen
+cursor.execute("DROP TABLE IF EXISTS mensen")
 cursor.execute("""
 		CREATE TABLE mensen
 		(
@@ -90,6 +91,7 @@ cursor.execute("""
 print "%d rows were inserted" % cursor.rowcount
 
 #add table rooster
+cursor.execute("DROP TABLE IF EXISTS rooster")
 cursor.execute("""
 		CREATE TABLE rooster
 		(
@@ -101,6 +103,7 @@ cursor.execute("""
 	""")
 
 #add table score
+cursor.execute("DROP TABLE IF EXISTS score")
 cursor.execute("""
 		CREATE TABLE score
 		(
@@ -109,7 +112,7 @@ cursor.execute("""
 		)
 	""")
 cursor.execute("""
-		INSERT INTO score (personID, score)
+		INSERT INTO score (personID, gedaan)
 		VALUES
 			(1, 0),
 			(2, 0),
