@@ -54,6 +54,7 @@ def getWorkers(amount, cursor):
 		if row == None:
 			print("No rows were returned.")
 			break
+		print("One row was returned")
 		if 1: #test availability
 			tempTuple = (int(row[1]), int(row[0]))
 			scoreIDsList.append(tempTuple)
