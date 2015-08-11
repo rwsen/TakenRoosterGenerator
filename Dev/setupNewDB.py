@@ -108,7 +108,7 @@ cursor.execute("""
 		CREATE TABLE score
 		(
 			personID INT,
-			score INT
+			gedaan INT
 		)
 	""")
 cursor.execute("""
