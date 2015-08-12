@@ -84,6 +84,7 @@ cursor.execute("""
 	CREATE TABLE rooster
 		(
 			weeknummer INT,
+			jaarnummer INT,
 			taakID INT,
 			personID INT,
 			uitgevoerd BOOL
