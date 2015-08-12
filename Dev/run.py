@@ -54,7 +54,7 @@ def getWorkers(amount, cursor):
 	
 	return
 
-def getAllPersonID (cursor)
+def getAllPersonID (cursor):
 	cursor.execute("""
 						SELECT personID FROM mensen
 	""")
@@ -70,7 +70,7 @@ def getAllPersonID (cursor)
 	
 	return IDList
 	
-def getAllOnbeschikbaar (cursor)
+def getAllOnbeschikbaar (cursor):
 	currentWeek = datetime.date.today().isocalendar()[1]
 	print "%s is the current week" % currentWeek
 	print """
