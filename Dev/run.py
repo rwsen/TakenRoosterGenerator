@@ -39,7 +39,6 @@ def getWorkers(amount, cursor):
 	for personID in onbeschikbaarList:
 		if personID in IDList:
 			IDList.remove(personID)
-			print "%s removed." %personID
 	
 	
 	#get scores to all personIDs
@@ -76,8 +75,8 @@ def getAllPersonID (cursor):
 	
 def getAllOnbeschikbaar (cursor):
 	currentWeek = datetime.date.today().isocalendar()[1]
-	print "%s is the current week" % currentWeek
-	sqlString = "SELECT personID FROM onbeschikbaar WHERE week=%s" %currentWeek
+	currentYear = datetime.date.today().isocalendar()[0]
+	sqlString = "SELECT personID FROM onbeschikbaar WHERE week=%s AND jaar=%s" %currentWeek %currentYear
 	cursor.execute(sqlString)
 	onbeschikbaarList = []
 	while (1):
