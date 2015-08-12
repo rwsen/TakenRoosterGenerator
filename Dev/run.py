@@ -34,7 +34,6 @@ def getWorkers(amount, cursor):
 	
 	#get all onbeschikbaar for current week
 	onbeschikbaarList = getAllOnbeschikbaar(cursor)
-	print "onbeschikbaarList: %s" %onbeschikbaarList
 	
 	#subtract onbeschikbaarList from IDList
 	for personID in onbeschikbaarList:
@@ -42,7 +41,6 @@ def getWorkers(amount, cursor):
 			IDList.remove(personID)
 			print "%s removed." %personID
 	
-	print IDList
 	
 	#get scores to all personIDs
 	cursor.execute("""SELECT personID, aantal FROM punten""")
@@ -51,6 +49,7 @@ def getWorkers(amount, cursor):
 		row = cursor.fetchone ()
 		if row == None:
 			break
+		print "row[0] = %s" %row[1]
 		if 1: #test availability
 			tempTuple = (int(row[1]), int(row[0]))
 			scoreIDsList.append(tempTuple)
