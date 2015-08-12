@@ -84,7 +84,7 @@ def getAllOnbeschikbaar (date, cursor):
 	while (1):
 		row = cursor.fetchone ()
 		if row == None:
-d			break
+			break
 		(number,) = row
 		onbeschikbaarList.append(int(number))
 	
