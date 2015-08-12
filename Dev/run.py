@@ -21,9 +21,9 @@ def calculateTaskIDs(weekNumber):
 
 def calculateWeek (weekNumber, cursor):
 	taskIDList = calculateTaskIDs(weekNumber)
-	print len(taskIDList)
-	
 	getWorkers(len(taskIDList), cursor)
+	
+	#Todo
 	
 	return
 
@@ -33,8 +33,13 @@ def getWorkers(amount, cursor):
 	IDList = getAllPersonID(cursor)
 	
 	#get all onbeschikbaar for current week
-	#onbeschikbaarList = 
-	getAllOnbeschikbaar(cursor)
+	onbeschikbaarList = getAllOnbeschikbaar(cursor)
+	
+	#subtract onbeschikbaarList from IDList
+	for personID in onbeschikbaarList:
+		if personID in IDList:
+			IDList.remove(personID)
+			print "%s removed." %personID
 	
 	#get scores to all personIDs
 	cursor.execute("""SELECT personID, aantal FROM punten""")
@@ -42,9 +47,7 @@ def getWorkers(amount, cursor):
 	while (1):
 		row = cursor.fetchone ()
 		if row == None:
-			print("No rows were returned.")
 			break
-		print("One row was returned")
 		if 1: #test availability
 			tempTuple = (int(row[1]), int(row[0]))
 			scoreIDsList.append(tempTuple)
@@ -73,14 +76,19 @@ def getAllPersonID (cursor):
 def getAllOnbeschikbaar (cursor):
 	currentWeek = datetime.date.today().isocalendar()[1]
 	print "%s is the current week" % currentWeek
-	print """
+	cursor.execute("""
 						SELECT personID FROM onbeschikbaar WHERE week=%s
-	""" %currentWeek
-	return
+	""")%currentWeek
+	onbeschikbaarList = []
+	while (1):
+		row = cursor.fetchone ()
+		if row == None:
+			break
+		(number,) = row
+		onbeschikbaarList.append(int(number))
 	
 	
-	
-	
+	return onbeschikbaarList
 	
 #open connection to mysql server
 conn = MySQLdb.connect (host = "localhost",
@@ -114,7 +122,7 @@ while (1):
 	if row == currentWeek:
 		absent = True
 	print "%s" % (row[0])
-print "%d rows were returned" % cursor.rowcount
+
 
 #calculate rooster
 if not absent:
