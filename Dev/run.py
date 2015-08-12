@@ -29,20 +29,12 @@ def calculateWeek (weekNumber, cursor):
 
 	
 def getWorkers(amount, cursor):
-	cursor.execute("""
-						SELECT personID FROM mensen
-	""")
+	#get all personIDs
+	IDList = getAllPersonID(cursor)
 	
-	#put all personIDs in IDList
-	IDList = []
-	while (1):
-		row = cursor.fetchone ()
-		if row == None:
-			break
-		(number,) = row
-		IDList.append(int(number))
-	
-	print(IDList)
+	#get all onbeschikbaar for current week
+	#onbeschikbaarList = 
+	getAllOnbeschikbaar()
 	
 	#get scores to all personIDs
 	cursor.execute("""SELECT personID, aantal FROM punten""")
@@ -59,12 +51,37 @@ def getWorkers(amount, cursor):
 			
 	print(scoreIDsList)
 			
-	sorted(scoreIDsList, key=lambda score: score[0])   # sort by age
-	
-	print(scoreIDsList)
 	
 	return
 
+def getAllPersonID (cursor)
+	cursor.execute("""
+						SELECT personID FROM mensen
+	""")
+	
+	#put all personIDs in IDList
+	IDList = []
+	while (1):
+		row = cursor.fetchone ()
+		if row == None:
+			break
+		(number,) = row
+		IDList.append(int(number))
+	
+	return IDList
+	
+def getAllOnbeschikbaar (cursor)
+	currentWeek = datetime.date.today().isocalendar()[1]
+	print "%s is the current week" % currentWeek
+	print """
+						SELECT personID FROM onbeschikbaar WHERE week=%s
+	""" %currentWeek
+	return
+	
+	
+	
+	
+	
 #open connection to mysql server
 conn = MySQLdb.connect (host = "localhost",
 						user = "root",
@@ -88,7 +105,7 @@ cursor.execute("""
 					SELECT weeknummer FROM rooster
 """)
 
-#print weeknumbers
+#check for current weeknumber in rooster
 absent = False
 while (1):
 	row = cursor.fetchone ()
@@ -99,10 +116,12 @@ while (1):
 	print "%s" % (row[0])
 print "%d rows were returned" % cursor.rowcount
 
+#calculate rooster
 if not absent:
 	calculateWeek(currentWeek, cursor)
 
 #close connection to mysql server
+conn.commit ()
 cursor.close ()
 conn.close ()
 

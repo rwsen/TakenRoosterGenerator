@@ -12,15 +12,15 @@ cursor = conn.cursor ()
 #add table taken
 cursor.execute("DROP TABLE IF EXISTS taken")
 cursor.execute("""
-		CREATE TABLE taken
+	CREATE TABLE taken
 		(
 			id INT,
 			naam CHAR(40),
 			regelmaat INT
 		)
-	""")
+""")
 cursor.execute("""
-		INSERT INTO taken (id, naam, regelmaat)
+	INSERT INTO taken (id, naam, regelmaat)
 		VALUES
 			(1, 'Vuilniszakken', 1),
 			(2, 'WC maandag of dinsdag', 1),
@@ -38,30 +38,19 @@ cursor.execute("""
 			(14, 'Adelaarstraat', 3),
 			(15, 'Koekoekstraat', 3),
 			(16, 'Lijsterstraat', 3)
-	""")
-print "%d rows were inserted" % cursor.rowcount
-
-cursor.execute ("SELECT id, naam FROM taken")
-while (1):
-	row = cursor.fetchone ()
-	if row == None:
-		break
-	print "%s, %s" % (row[0], row[1])
-print "%d rows were returned" % cursor.rowcount
-
-
+""")
 
 #add table mensen
 cursor.execute("DROP TABLE IF EXISTS mensen")
 cursor.execute("""
-		CREATE TABLE mensen
+	CREATE TABLE mensen
 		(
 			personID INT,
 			naam CHAR(40)
 		)
-	""")
+""")
 cursor.execute("""
-		INSERT INTO mensen (personID, naam)
+	INSERT INTO mensen (personID, naam)
 		VALUES
 			(1, 'Iris'),
 			(2, 'Emmalien'),
@@ -87,42 +76,78 @@ cursor.execute("""
 			(22, 'Rick'),
 			(23, 'Alper'),
 			(24, 'Folkert')
-	""")
-print "%d rows were inserted" % cursor.rowcount
+""")
 
 #add table rooster
 cursor.execute("DROP TABLE IF EXISTS rooster")
 cursor.execute("""
-		CREATE TABLE rooster
+	CREATE TABLE rooster
 		(
 			weeknummer INT,
 			taakID INT,
 			personID INT,
 			uitgevoerd BOOL
 		)
-	""")
+""")
 
 #add table punten
 cursor.execute("DROP TABLE IF EXISTS punten")
 cursor.execute("""
-		CREATE TABLE punten
+	CREATE TABLE punten
 		(
 			personID INT,
 			aantal INT
 		)
-	""")
+""")
 cursor.execute("""
-		INSERT INTO punten (personID, aantal)
+	INSERT INTO punten (personID, aantal)
 		VALUES
 			(1, 0),
 			(2, 0),
 			(3, 0),
 			(4, 0),
-			(5, 0)
-	""")
-print "%d rows were inserted" % cursor.rowcount
+			(5, 0),
+			(6, 0),
+			(7, 0),
+			(8, 0),
+			(9, 0),
+			(10, 0),
+			(11, 0),
+			(12, 0),
+			(13, 0),
+			(14, 0),
+			(15, 0),
+			(16, 0),
+			(17, 0),
+			(18, 0),
+			(19, 0),
+			(20, 0),
+			(21, 0),
+			(22, 0),
+			(23, 0),
+			(24, 0)
+""")
 	
-	
+#create table onbeschikbaar
+cursor.execute("DROP TABLE IF EXISTS onbeschikbaar")
+cursor.execute("""
+	CREATE TABLE onbeschikbaar
+		(
+			personID INT,
+			week INT,
+			jaar INT
+		)
+""")
+cursor.execute("""
+	INSERT INTO onbeschikbaar (personID, week, jaar)
+		VALUES
+			(22, 33, 2015)
+""")
+
+
+
+
+
 #close connection to mysql server
 conn.commit ()
 cursor.close ()
