@@ -49,7 +49,7 @@ def getWorkers(amount, cursor):
 		row = cursor.fetchone ()
 		if row == None:
 			break
-		print "row[0] = %s" %row[1]
+		print "row[0] = %s" %row[0]
 		if 1: #test availability
 			tempTuple = (int(row[1]), int(row[0]))
 			scoreIDsList.append(tempTuple)
