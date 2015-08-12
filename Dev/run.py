@@ -42,6 +42,8 @@ def getWorkers(amount, cursor):
 			IDList.remove(personID)
 			print "%s removed." %personID
 	
+	print IDList
+	
 	#get scores to all personIDs
 	cursor.execute("""SELECT personID, aantal FROM punten""")
 	scoreIDsList = []
