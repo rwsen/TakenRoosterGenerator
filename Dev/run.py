@@ -76,9 +76,8 @@ def getAllPersonID (cursor):
 def getAllOnbeschikbaar (cursor):
 	currentWeek = datetime.date.today().isocalendar()[1]
 	print "%s is the current week" % currentWeek
-	cursor.execute("""
-						SELECT personID FROM onbeschikbaar WHERE week=%s
-	""")%currentWeek
+	sqlString = "SELECT personID FROM onbeschikbaar WHERE week=%s" %currentWeek
+	cursor.execute(sqlString)
 	onbeschikbaarList = []
 	while (1):
 		row = cursor.fetchone ()
