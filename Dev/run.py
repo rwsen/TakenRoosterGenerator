@@ -55,7 +55,7 @@ def getWorkers(amount, date, cursor):
 			scoreIDsList.append(tempTuple)
 			
 	print(scoreIDsList)
-	sortedList = sorted(scoreIDList, key-lambda t:t[0])
+	sortedList = sorted(scoreIDList, key=lambda t:t[0])
 	print(soretedList)
 	
 	return
