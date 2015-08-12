@@ -34,6 +34,7 @@ def getWorkers(amount, cursor):
 	
 	#get all onbeschikbaar for current week
 	onbeschikbaarList = getAllOnbeschikbaar(cursor)
+	print "onbeschikbaarList: %s" %onbeschikbaarList
 	
 	#subtract onbeschikbaarList from IDList
 	for personID in onbeschikbaarList:
