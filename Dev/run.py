@@ -76,7 +76,7 @@ def getAllPersonID (cursor):
 def getAllOnbeschikbaar (cursor):
 	currentWeek = datetime.date.today().isocalendar()[1]
 	currentYear = datetime.date.today().isocalendar()[0]
-	sqlString = "SELECT personID FROM onbeschikbaar WHERE week=%s AND jaar=%s" %currentWeek %currentYear
+	sqlString = "SELECT personID FROM onbeschikbaar WHERE week=%s AND jaar=%s" % (currentWeek, currentYear)
 	cursor.execute(sqlString)
 	onbeschikbaarList = []
 	while (1):
