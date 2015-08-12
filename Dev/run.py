@@ -55,7 +55,8 @@ def getWorkers(amount, date, cursor):
 			scoreIDsList.append(tempTuple)
 			
 	print(scoreIDsList)
-			
+	sortedList = sorted(scoreIDList, key-lambda t:t[0])
+	print(soretedList)
 	
 	return
 
@@ -102,12 +103,9 @@ cursor = conn.cursor ()
 #get weeknumber and year
 dateToday = datetime.date.today()
 currentWeek = dateToday.isocalendar()[1]
-currentYear = dateToday.isocalendar()[0]
 
 #add 21 days to the dateToday, to get a future weeknumber
-dateFuture = dateToday + datetime.timedelta(210)
-futureWeek = dateFuture.isocalendar()[1]
-futureYear = dateFuture.isocalendar()[0]
+dateFuture = dateToday + datetime.timedelta(21)
 
 #test is there is a rooster for the current week
 cursor.execute("""
@@ -115,18 +113,17 @@ cursor.execute("""
 """)
 
 #check for current weeknumber in rooster
-absent = False
+absent = True
 while (1):
 	row = cursor.fetchone ()
 	if row == None:
 		break
 	if row == currentWeek:
-		absent = True
+		absent = False
 	print "%s" % (row[0])
 
-
 #calculate rooster
-if not absent:
+if absent:
 	calculateWeek(dateToday, cursor)
 
 #close connection to mysql server
