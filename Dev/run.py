@@ -26,7 +26,7 @@ def calculateWeek (date, cursor):
 	workerIDList = getWorkers(len(taskIDList), date, cursor)
 	
 	print workerIDList
-	
+	print (len(taskIDList) == len(workerIDList))
 	#Todo
 	
 	return
