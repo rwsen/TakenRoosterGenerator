@@ -34,7 +34,7 @@ def getWorkers(amount, cursor):
 	
 	#get all onbeschikbaar for current week
 	#onbeschikbaarList = 
-	getAllOnbeschikbaar()
+	getAllOnbeschikbaar(cursor)
 	
 	#get scores to all personIDs
 	cursor.execute("""SELECT personID, aantal FROM punten""")
