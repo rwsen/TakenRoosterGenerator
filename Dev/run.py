@@ -110,37 +110,39 @@ conn = MySQLdb.connect (host = "localhost",
 						db = "test")
 cursor = conn.cursor ()
 
+#determines how far ahead the shedule will be calculated
+lookAhead = 3
 
-#get weeknumber and year
-dateToday = datetime.date.today()
-currentWeek = dateToday.isocalendar()[1]
-currentYear = dateToday.isocalendar()[0]
+for delta in range(0, (lookAhead+1)*7, 7):
+	#determine currentweek and currentyear
+	dateToday = datetime.date.today()
+	dateToday = dateToday + datetime.timedelta(delta)
+	currentWeek = dateToday.isocalendar()[1]
+	currentYear = dateToday.isocalendar()[0]
 
-#add 21 days to the dateToday, to get a future weeknumber
-dateFuture = dateToday + datetime.timedelta(21)
-
-#test is there is a rooster for the current week
-cursor.execute("""
-					SELECT weeknummer, jaarnummer FROM rooster
-""")
-
-#check for current weeknumber in rooster
-absent = True
-while (1):
-	row = cursor.fetchone ()
-	if row == None:
-		break
-	if row == (currentWeek, currentYear):
-		absent = False
-		print "row is currentweek and year"
-	print "%s" % (row[0])
-
-#calculate rooster
-if absent:
-	calculateWeek(dateToday, cursor)
-
-nextWeekDate = dateToday + datetime.timedelta(7)
-nextWeek = nextWeekDate.isocalendar()[1]
+	#test if there is a rooster for the current week
+	cursor.execute("""
+						SELECT weeknummer, jaarnummer FROM rooster
+	""")
+	
+	#check for current weeknumber in rooster
+	absent = True
+	while (1):
+		row = cursor.fetchone ()
+		if row == None:
+			break
+		if row == (currentWeek, currentYear):
+			absent = False
+			print "Week %s gevonden." % currentWeek
+			break
+	
+	#calculate rooster
+	if absent:
+		calculateWeek(dateToday, cursor)
+		
+		
+	
+	
 	
 #close connection to mysql server
 conn.commit ()
