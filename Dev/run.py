@@ -6,6 +6,7 @@
 import MySQLdb
 import datetime
 from random import shuffle
+import settings
 
 def calculateTaskIDs(weekNumber, cursor):
 	list = []
@@ -36,14 +37,7 @@ def calculateWeek (date, cursor):
 		sqlString = "INSERT INTO rooster (weeknummer, taakID, personID, uitgevoerd) VALUES (%s, %s, %s, %s)" % (weekNumber, taskID, workerIDList.pop()[1], False)
 		cursor.execute(sqlString)
 	
-	cursor.execute("SELECT * FROM rooster")
-	while (1):
-		row = cursor.fetchone ()
-		if row == None:
-			break
-		print "%s, %s, %s, %s" % (row[0], row[1], row[2], row[3])
-		
-		
+	
 	return
 
 	
@@ -148,5 +142,5 @@ conn.commit ()
 cursor.close ()
 conn.close ()
 
-
+print "lookAhead is %s" % lookAhead
 print("much succes")
