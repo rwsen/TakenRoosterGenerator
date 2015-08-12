@@ -23,7 +23,9 @@ def calculateWeek (date, cursor):
 	weekNumber = date.isocalendar()[1]
 	taskIDList = calculateTaskIDs(weekNumber, cursor)
 	#get workers(amount, date, SQLcursor)
-	getWorkers(len(taskIDList), date, cursor)
+	workerIDList = getWorkers(len(taskIDList), date, cursor)
+	
+	print workerIDList
 	
 	#Todo
 	
@@ -54,11 +56,11 @@ def getWorkers(amount, date, cursor):
 			tempTuple = (int(row[1]), int(row[0]))
 			scoreIDsList.append(tempTuple)
 			
-	print(scoreIDsList)
+	# sort the list
 	sortedList = sorted(scoreIDsList, key=lambda t:t[0])
-	print(sortedList)
 	
-	return
+	
+	return sortedList[:amount]
 
 def getAllPersonID (cursor):
 	cursor.execute("""
