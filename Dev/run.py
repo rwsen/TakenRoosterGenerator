@@ -6,7 +6,7 @@
 import MySQLdb
 import datetime
 
-def calculateTaskIDs(weekNumber):
+def calculateTaskIDs(weekNumber, cursor):
 	list = []
 	cursor.execute ("SELECT id, regelmaat FROM taken")
 	while (1):
@@ -19,21 +19,23 @@ def calculateTaskIDs(weekNumber):
 	return list
 
 
-def calculateWeek (weekNumber, cursor):
-	taskIDList = calculateTaskIDs(weekNumber)
-	getWorkers(len(taskIDList), cursor)
+def calculateWeek (date, cursor):
+	weekNumber = date.isocalendar()[1]
+	taskIDList = calculateTaskIDs(weekNumber, cursor)
+	#get workers(amount, date, SQLcursor)
+	getWorkers(len(taskIDList), date, cursor)
 	
 	#Todo
 	
 	return
 
 	
-def getWorkers(amount, cursor):
+def getWorkers(amount, date, cursor):
 	#get all personIDs
 	IDList = getAllPersonID(cursor)
 	
 	#get all onbeschikbaar for current week
-	onbeschikbaarList = getAllOnbeschikbaar(cursor)
+	onbeschikbaarList = getAllOnbeschikbaar(date, cursor)
 	
 	#subtract onbeschikbaarList from IDList
 	for personID in onbeschikbaarList:
@@ -73,16 +75,16 @@ def getAllPersonID (cursor):
 	
 	return IDList
 	
-def getAllOnbeschikbaar (cursor):
-	currentWeek = datetime.date.today().isocalendar()[1]
-	currentYear = datetime.date.today().isocalendar()[0]
+def getAllOnbeschikbaar (date, cursor):
+	currentWeek = date.isocalendar()[1]
+	currentYear = date.isocalendar()[0]
 	sqlString = "SELECT personID FROM onbeschikbaar WHERE week=%s AND jaar=%s" % (currentWeek, currentYear)
 	cursor.execute(sqlString)
 	onbeschikbaarList = []
 	while (1):
 		row = cursor.fetchone ()
 		if row == None:
-			break
+d			break
 		(number,) = row
 		onbeschikbaarList.append(int(number))
 	
@@ -125,7 +127,7 @@ while (1):
 
 #calculate rooster
 if not absent:
-	calculateWeek(currentWeek, cursor)
+	calculateWeek(dateToday, cursor)
 
 #close connection to mysql server
 conn.commit ()
