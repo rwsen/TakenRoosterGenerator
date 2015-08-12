@@ -6,7 +6,6 @@
 import MySQLdb
 import datetime
 from random import shuffle
-import settings
 
 def calculateTaskIDs(weekNumber, cursor):
 	list = []
@@ -23,6 +22,7 @@ def calculateTaskIDs(weekNumber, cursor):
 
 def calculateWeek (date, cursor):
 	weekNumber = date.isocalendar()[1]
+	yearNumber = date.isocalendar()[0]
 	taskIDList = calculateTaskIDs(weekNumber, cursor)
 	#get workers(amount, date, SQLcursor)
 	workerIDList = getWorkers(len(taskIDList), date, cursor)
@@ -34,7 +34,7 @@ def calculateWeek (date, cursor):
 	
 	#Todo: build the roster
 	for taskID in taskIDList:
-		sqlString = "INSERT INTO rooster (weeknummer, taakID, personID, uitgevoerd) VALUES (%s, %s, %s, %s)" % (weekNumber, taskID, workerIDList.pop()[1], False)
+		sqlString = "INSERT INTO rooster (weeknummer, jaarnummer, taakID, personID, uitgevoerd) VALUES (%s, %s, %s, %s, %s)" % (weekNumber, yearNumber, taskID, workerIDList.pop()[1], False)
 		cursor.execute(sqlString)
 	
 	
@@ -114,13 +114,14 @@ cursor = conn.cursor ()
 #get weeknumber and year
 dateToday = datetime.date.today()
 currentWeek = dateToday.isocalendar()[1]
+currentYear = dateToday.isocalendar()[0]
 
 #add 21 days to the dateToday, to get a future weeknumber
 dateFuture = dateToday + datetime.timedelta(21)
 
 #test is there is a rooster for the current week
 cursor.execute("""
-					SELECT weeknummer FROM rooster
+					SELECT weeknummer, jaarnummer FROM rooster
 """)
 
 #check for current weeknumber in rooster
@@ -129,18 +130,21 @@ while (1):
 	row = cursor.fetchone ()
 	if row == None:
 		break
-	if row == currentWeek:
+	if row == (currentWeek, currentYear):
 		absent = False
+		print "row is currentweek and year"
 	print "%s" % (row[0])
 
 #calculate rooster
 if absent:
 	calculateWeek(dateToday, cursor)
 
+nextWeekDate = dateToday + datetime.timedelta(7)
+nextWeek = nextWeekDate.isocalendar()[1]
+	
 #close connection to mysql server
 conn.commit ()
 cursor.close ()
 conn.close ()
 
-print "lookAhead is %s" % lookAhead
 print("much succes")
