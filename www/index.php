@@ -5,6 +5,8 @@
 </head>
 <body>
 
+
+<!--
 <?php
 $servername = "localhost";
 $username = "root";
@@ -33,6 +35,8 @@ if ($result->num_rows > 0) {
 }
 $conn->close();
 ?>
+-->
+
 
 </body>
 </html> 
