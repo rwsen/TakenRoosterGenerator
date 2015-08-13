@@ -38,7 +38,7 @@ $conn->close();
 -->
 
 <?php
-echo "Hello, world!"
+echo "<p>Hello, world!<p>";
 ?>
 
 
