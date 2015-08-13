@@ -37,6 +37,12 @@ $conn->close();
 ?>
 -->
 
+<?php
+echo "Hello, world!"
+?>
+
+
+
 
 </body>
 </html> 
