@@ -110,9 +110,11 @@ conn = MySQLdb.connect (host = "localhost",
 						db = "test")
 cursor = conn.cursor ()
 
+
 #determines how far ahead the shedule will be calculated
 lookAhead = 3
 
+#calculate the new rooster for the coming week(s)
 for delta in range(0, (lookAhead+1)*7, 7):
 	#determine currentweek and currentyear
 	dateToday = datetime.date.today()
